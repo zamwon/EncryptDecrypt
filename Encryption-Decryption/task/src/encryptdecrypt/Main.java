@@ -8,11 +8,11 @@ public class Main {
 
     private static String input;
     private static int modulator;
-    private static String  xFile = "";
+    private static String xFile = "";
 
 
+    public static void encryptUni() {
 
-    public static void encrypt() {
 
         char[] arr = input.toCharArray();
         for (char inputChar : arr) {
@@ -27,7 +27,7 @@ public class Main {
         }
     }
 
-    public static void decrypt() {
+    public static void decryptUni() {
 
         char[] arr = input.toCharArray();
         for (char inputChar : arr) {
@@ -38,6 +38,59 @@ public class Main {
                 }
                 xFile += decryptedChar;
 
+            }
+        }
+    }
+
+    public static void encrypt() {
+
+
+        char[] arr = input.toCharArray();
+        for (char inputChar : arr) {
+            if (inputChar > 64 && inputChar < 91) {
+                char tempEncryptedChar = (char) (inputChar + (modulator % 26));
+                if (tempEncryptedChar > 90) {
+                    char encryptedChar = (char) (64 + tempEncryptedChar - 90);
+                    xFile += encryptedChar;
+                } else {
+                    xFile += tempEncryptedChar;
+                }
+            } else if (inputChar > 96 && inputChar < 123) {
+                char tempEncryptedChar = (char) (inputChar + (modulator % 26));
+                if (tempEncryptedChar > 122) {
+                    char encryptedChar = (char) (96 + tempEncryptedChar - 122);
+                    xFile += encryptedChar;
+                } else {
+                    xFile += tempEncryptedChar;
+                }
+            } else {
+                xFile += inputChar;
+            }
+        }
+    }
+
+    public static void decrypt() {
+
+        char[] arr = input.toCharArray();
+        for (char inputChar : arr) {
+            if (inputChar > 64 && inputChar < 91) {
+                char tempCh = (char) (inputChar + 26 - (modulator % 26));
+                if (tempCh > 90) {
+                    char decryptedChar = (char) (64 + tempCh - 90);
+                    xFile += decryptedChar;
+                } else {
+                    xFile += tempCh;
+                }
+            } else if (inputChar > 96 && inputChar < 123) {
+                char temp2char = (char) (inputChar + 26 - (modulator % 26));
+                if (temp2char > 122) {
+                    char decryptedChar = (char) (96 + temp2char - 122);
+                    xFile += decryptedChar;
+                } else {
+                    xFile += temp2char;
+                }
+            } else {
+                xFile += inputChar;
             }
         }
     }
@@ -81,11 +134,21 @@ public class Main {
 
         // MODE ENC/DEC
 
-        if (mapa.getOrDefault("-mode", "enc").equals("enc")) {
-            encrypt();
-        } else {
-            decrypt();
+        if (mapa.get("-alg").equals("unicode")) {
+
+            if (mapa.getOrDefault("-mode", "enc").equals("enc")) {
+                encryptUni();
+            } else {
+                decryptUni();
+            }
+        } else if (mapa.get("-alg").equals("shift")) {
+            if (mapa.getOrDefault("-mode", "enc").equals("enc")) {
+                encrypt();
+            } else {
+                decrypt();
+            }
         }
+
 
         // OUT OR PRINT
         exampleOut = mapa.get("-out");
@@ -100,8 +163,6 @@ public class Main {
             } catch (Exception e) {
                 System.out.println("Error 2");
             }
-
-
         }
     }
 }

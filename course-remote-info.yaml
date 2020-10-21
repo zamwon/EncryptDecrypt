@@ -6,16 +6,22 @@ hyperskill_project:
 stages:
 - id: 245
   step: 5387
+  is_completed: true
 - id: 246
   step: 5388
+  is_completed: true
 - id: 247
   step: 5389
+  is_completed: true
 - id: 248
   step: 5390
+  is_completed: true
 - id: 249
   step: 5391
+  is_completed: true
 - id: 250
   step: 5392
+  is_completed: true
 topics:
   0:
   - title: Introduction to Java
@@ -28,7 +34,7 @@ topics:
     theory_id: 3749
   1:
   - title: IDE
-    theory_id: 3805
+    theory_id: 10996
   - title: Types and variables
     theory_id: 3518
   - title: Primitive and reference types
@@ -101,6 +107,8 @@ topics:
     theory_id: 3746
   - title: Command-line arguments
     theory_id: 3566
+  - title: IntelliJ Run Configurations
+    theory_id: 10630
   4:
   - title: Introduction to OOP
     theory_id: 3614
